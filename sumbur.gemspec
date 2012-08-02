@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["funny.falcon@gmail.com", "uint32@mail.ru"]
   gem.description   = %q{Sumbur - consistent spreading}
   gem.summary       = %q{Sumbur - consistent spreading}
-  gem.homepage      = "https://github.com/funny-falcon/sumbur"
+  gem.homepage      = "https://github.com/mailru/sumbur-ruby"
 
   gem.files         = Dir['ext/**/*'].grep(/\.(rb|c)$/) +
                       (Dir['lib/**/*'] + Dir['test/**/*']).grep(/\.rb$/)
