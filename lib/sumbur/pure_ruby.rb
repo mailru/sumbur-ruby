@@ -9,7 +9,7 @@ module Sumbur
       l = 0xFFFFFFFF
       part = l / cluster_capacity
 
-      return 0  if l - hashed_integer < part
+      return 0  if l - hashed_integer <= part
 
       h = hashed_integer
       n = 1

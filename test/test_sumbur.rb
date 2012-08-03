@@ -53,12 +53,12 @@ begin
   require 'sumbur/native_sumbur'
 
   describe "Native" do
-    let(:sumbur) { Sumbur::Native }
+    let(:sumbur) { Sumbur::NativeSumbur }
     class_exec &shared_example
 
     it "should produce same spread as pure ruby version" do
       for capa in [2,3,4,7,8,9,17,18,19]
-        spread(1_000_000, capa, Sumbur::Native).must_equal spread(1_000_000, capa, Sumbur::PureRuby)
+        spread(1_000_000, capa, Sumbur::NativeSumbur).must_equal spread(1_000_000, capa, Sumbur::PureRuby)
       end
     end
   end

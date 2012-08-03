@@ -61,7 +61,7 @@ void
 Init_native_sumbur()
 {
     VALUE mod_sumbur = rb_define_module("Sumbur");
-    VALUE mod_native = rb_define_module_under(mod_sumbur, "Native");
+    VALUE mod_native = rb_define_module_under(mod_sumbur, "NativeSumbur");
 
     rb_define_method(mod_native, "sumbur", rb_sumbur, 2);
     rb_extend_object(mod_native, mod_native);
