@@ -21,12 +21,14 @@ Or install it yourself as:
 ```ruby
   require 'sumbur'
 
-  Sumbur.sumbur(hashof(value), cluster_capacity) # => 0 <= int < cluser_capacity
+  servers = [server0, server1, server2]
+  server_nom = Sumbur.sumbur(hashof(value), servers.size) # => 0 <= int < servers.size
+  use servers[server_nom]
 
   class Class
     include Sumbur
     def method
-      sumbur(hashof(value), cluster_capacity)
+      servers[ sumbur(hashof(value), servers.size) ]
     end
   end
 ```
