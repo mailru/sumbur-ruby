@@ -4,15 +4,20 @@ require File.expand_path('../lib/sumbur/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Sokolov Yura 'funny-falcon'", "Maksim Kalinchenko"]
   gem.email         = ["funny.falcon@gmail.com", "uint32@mail.ru"]
-  gem.description   = %q{Sumbur - consistent spreading}
-  gem.summary       = %q{Sumbur - consistent spreading}
+  gem.description   = %q{Sumbur - consistent spreading for server balancing}
+  gem.summary       = %q{Sumbur - consistent spreading for server balancing}
   gem.homepage      = "https://github.com/mailru/sumbur-ruby"
 
-  gem.files         = Dir['ext/**/*'].grep(/\.(rb|c)$/) +
+  if RUBY_ENGINE == 'ruby'
+    gem.extensions    = ["ext/sumbur/extconf.rb"]
+    gem.require_paths = ["lib", "ext"]
+    gem.files         = Dir['ext/**/*'].grep(/\.(rb|c)$/) +
                       (Dir['lib/**/*'] + Dir['test/**/*']).grep(/\.rb$/)
+  elsif RUBY_ENGINE == 'jruby'
+    gem.files         = (Dir['lib/**/*'] + Dir['test/**/*']).grep(/\.(rb|jar)$/)
+    gem.platform = 'jruby'
+  end
   gem.test_files    = gem.files.grep(%r{^test/})
-  gem.extensions    = ["ext/sumbur/extconf.rb"]
   gem.name          = "sumbur"
-  gem.require_paths = ["lib", "ext"]
   gem.version       = Sumbur::VERSION
 end

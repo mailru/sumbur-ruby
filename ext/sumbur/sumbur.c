@@ -8,13 +8,13 @@ rb_sumbur(VALUE self, VALUE hashed_int, VALUE capacity)
     unsigned int capa = NUM2UINT(capacity);
     unsigned int part, n, i, c;
 
-    if (capacity == 0) {
+    if (capa == 0) {
         rb_raise(rb_eArgError, "Sumbur is not applicable to empty cluster");
     }
 
     part = L / capa;
 
-    if (L - h <= part) return INT2FIX(0);
+    if (L - h < part) return INT2FIX(0);
 
     n = 1;
 
