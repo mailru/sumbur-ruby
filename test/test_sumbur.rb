@@ -76,7 +76,7 @@ begin
     class_exec &shared_example
 
     it "should produce same spread as pure ruby version" do
-      for capa in [2,3,4,7,8,9,17,18,19]
+      for capa in [2,3,4,7,8,9,17,18,19,100]
         spread(1_000_000, capa, sumbur).must_equal spread(1_000_000, capa, Sumbur::PureRuby)
       end
     end
