@@ -49,18 +49,20 @@ Or install it yourself as:
     $ gem install sumbur
 
 ## Usage
+Strict dependency: you ought to provide 32bit unsigned hash function with good spreading of high bits.
+For example, you could use `Zlib.crc32` or [MurmurHash3](https://github.com/funny-falcon/murmurhash3-ruby) 
 
 ```ruby
   require 'sumbur'
 
   servers = [server0, server1, server2]
-  server_nom = Sumbur.sumbur(hashof(value), servers.size) # => 0 <= int < servers.size
+  server_nom = Sumbur.sumbur(unsigned_32bit_hashof(value), servers.size) # => 0 <= int < servers.size
   use servers[server_nom]
 
   class Class
     include Sumbur
     def method
-      servers[ sumbur(hashof(value), servers.size) ]
+      servers[ sumbur(unsigned_32bit_hashof(value), servers.size) ]
     end
   end
 ```
