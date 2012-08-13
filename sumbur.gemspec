@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   elsif RUBY_ENGINE == 'jruby'
     gem.files         = (Dir['lib/**/*'] + Dir['test/**/*']).grep(/\.(rb|jar)$/)
     gem.platform = 'jruby'
+    gem.require_paths = ["lib"]
   end
   gem.test_files    = gem.files.grep(%r{^test/})
   gem.name          = "sumbur"
