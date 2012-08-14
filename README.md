@@ -1,6 +1,6 @@
 # Sumbur
 
-It is an implementation of Sumbur spreading algorithm authored by Maksim Kalinchenko uint32@mail.ru
+It is an implementation of Sumbur consistent spreading algorithm authored by Maksim Kalinchenko uint32@mail.ru
 
 Here is an explanation of algorithm as far as I could understand it:
 
@@ -34,6 +34,11 @@ servers are organized in a kind of RAID0+1: items are spread over number of shar
 protected by replication. While "consistent hashing" mostly assumes, that items are replicated over
 number of shards.
 
+Closest analog I've seen so far is Guava Google Library's [consistentHash function](http://code.google.com/p/guava-libraries/source/browse/guava/src/com/google/common/hash/Hashing.java?name=release12#197).
+It has some benefit cause it randomize input integer, so that doesn't require separate hash function.
+Also it is a bit faster with huge number of shards. But in most cases Sumbur gives slightly better
+spreading.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -50,7 +55,7 @@ Or install it yourself as:
 
 ## Usage
 Strict dependency: you ought to provide 32bit unsigned hash function with good spreading of high bits.
-For example, you could use `Zlib.crc32` or [MurmurHash3](https://github.com/funny-falcon/murmurhash3-ruby) 
+For example, you could use `Zlib.crc32` or [MurmurHash3](https://github.com/funny-falcon/murmurhash3-ruby).
 
 ```ruby
   require 'sumbur'
@@ -64,6 +69,16 @@ For example, you could use `Zlib.crc32` or [MurmurHash3](https://github.com/funn
     def method
       servers[ sumbur(unsigned_32bit_hashof(value), servers.size) ]
     end
+  end
+```
+
+In case of monotonically increasing integer keys (record id) following function could be used as hash given
+unbeatably good spreading with sumbur:
+
+```ruby
+  def unsigned_32bit_hashof(id)
+    h = id * 0x531a5229
+    (h+(h>>32))&0xffffffff
   end
 ```
 
