@@ -77,8 +77,7 @@ unbeatably good spreading with sumbur:
 
 ```ruby
   def unsigned_32bit_hashof(id)
-    h = id * 0x531a5229
-    (h+(h>>32))&0xffffffff
+    h = id * 0x531a5229 & 0xffffffff
   end
 ```
 
