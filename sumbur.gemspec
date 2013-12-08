@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Sumbur - consistent spreading for server balancing}
   gem.summary       = %q{Sumbur - consistent spreading for server balancing}
   gem.homepage      = "https://github.com/mailru/sumbur-ruby"
+  gem.license       = "MIT"
 
   if RUBY_ENGINE == 'ruby'
     gem.extensions    = ["ext/sumbur/extconf.rb"]
